@@ -81,6 +81,12 @@ function addPics(counter) {
 			picCell = document.createElement('div'),
 			sign = document.createElement('span'),
 			size;
+		
+		//On picture loaded adding real height and width
+		pic.addEventListener('load', function() {
+				sign.innerHTML += ' , Width: ' + pic.naturalWidth + ', Height: ' + pic.naturalHeight;
+		});
+			
 		pic.src = 'img/'+counter+'.jpg';
 		picCell.classList.add('myImage');
 
@@ -96,12 +102,9 @@ function addPics(counter) {
 		picSize(pic.src, function(kb) {
 			size = kb;
 			//Adding pic size from AJAX request
-			sign.innerHTML ='Size is ' + size + 'Kb';
+			sign.innerHTML ='Size is ' + size + 'Kb' + sign.innerHTML;
 		});
-		//On picture loaded adding real height and width
-		pic.addEventListener('load', function() {
-				sign.innerHTML += ' , Width: ' + pic.naturalWidth + ', Height: ' + pic.naturalHeight;
-		});
+		
 		sign.style.opacity = 0;
 		sumButtonSwitch();
 };
