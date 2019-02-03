@@ -56,12 +56,16 @@ picsAmount.addEventListener('blur', builder);
 buildGallery.addEventListener('click', builder);
 
 
-//Multiple pic adding function on input press Enter
-picsAmount.addEventListener('keydown', function(event) {
-
+//Multiple pic adding function on input press Enter and entering only numbers check
+picsAmount.addEventListener('keypress', function(event) {
 	if (event.keyCode === 13) {
-		builder();
+			builder();
 	}
+	else {	
+		if ((event.charCode < 48 || event.charCode > 57) && event.keyCode != 8){
+		event.preventDefault();
+		}
+	}	
 
 });
 
@@ -152,8 +156,9 @@ function createSumTable() {
 
 	sumTable.classList.add('createdtable');
 	asideTable.appendChild(sumTable);
+	
+	//Creating title row
 	sumTable.appendChild(titleTr);
-
 	titleTr.appendChild(document.createElement('td'));
 	titleTr.lastChild.innerHTML = 'Image';
 	titleTr.appendChild(document.createElement('td'));
@@ -163,6 +168,7 @@ function createSumTable() {
 	titleTr.appendChild(document.createElement('td'));
 	titleTr.lastChild.innerHTML = 'Size';
 
+	//Creating rows for pics
 	for (var i = 0; i < document.getElementsByClassName('myImage').length; i++) {
 		var sumTr = document.createElement('tr');
 		sumTable.appendChild(sumTr);
